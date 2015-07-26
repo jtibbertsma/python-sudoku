@@ -17,7 +17,7 @@ from .moves import *;    from . import moves
 from .concrete import *; from . import concrete
 from .config import *;   from . import config
 from .errors import *;   from . import errors
-import engine
+import sudoku
 
 # TODO: Clean this up and write docstrings and make it an actual module.
 #       Move experimentation type stuff into a file called junk.py and keep

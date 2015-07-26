@@ -495,7 +495,7 @@ static PyMethodDef CandidateSet_methods[] = {
 
 static PyTypeObject CandidateSet_Type = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "engine.data.CandidateSet", /*tp_name*/
+    "sudoku.data.CandidateSet", /*tp_name*/
     sizeof(CandidateSetObject), /*tp_basicsize*/
     0,                          /*tp_itemsize*/
     /* methods */
@@ -1783,7 +1783,7 @@ static PyMemberDef KeyIter_members[] = {
 
 static PyTypeObject state_iterator_Type = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "engine.data.state_iterator",/*tp_name*/
+    "sudoku.data.state_iterator",/*tp_name*/
     sizeof(KeyIterObject) - sizeof(Py_ssize_t),/*tp_basicsize*/
     sizeof(Py_ssize_t),         /*tp_itemsize*/
     /* methods */
@@ -3285,7 +3285,7 @@ data_State_clear(SudokuStateObject *self)
 
 static PyTypeObject SudokuState_Type = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "engine.data.State",        /*tp_name*/
+    "sudoku.data.State",        /*tp_name*/
     sizeof(SudokuStateObject),  /*tp_basicsize*/
     0,                          /*tp_itemsize*/
     /* methods */
@@ -3345,7 +3345,7 @@ data_free(void *m)
 
 static struct PyModuleDef datamodule = {
     PyModuleDef_HEAD_INIT,
-    "engine.data",
+    "sudoku.data",
     module_doc,
     -1,
     NULL,
@@ -3364,8 +3364,8 @@ PyInit_data(void)
     Py_ssize_t i;
     
     /* Get globals */
-    con_mod = PyImport_ImportModule("engine.config");
-    err_mod = PyImport_ImportModule("engine.errors");
+    con_mod = PyImport_ImportModule("sudoku.config");
+    err_mod = PyImport_ImportModule("sudoku.errors");
     if (!con_mod || !err_mod)
         goto fail;
     config_module = PyModule_GetDict(con_mod);

@@ -4,9 +4,9 @@
 
 import profile
 
-from engine.util import gl
-from engine.create import create_terminal_pattern
-from engine.concrete import ProfileSolver, FastSolver
+from sudoku.util import gl
+from sudoku.create import create_terminal_pattern
+from sudoku.concrete import ProfileSolver, FastSolver
 
 def grids():
     for n in range(267, 2000, 31):
@@ -15,6 +15,10 @@ def grids():
 def main():
     for solver in map(FastSolver, grids()):
         solver.solve()
+
+# def main():
+#     for solver in map(ProfileSolver, grids()):
+#         solver.solve()
 
 if __name__ == '__main__':
     profile.run(main.__code__, sort='tottime')
