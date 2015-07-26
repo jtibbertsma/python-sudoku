@@ -9,10 +9,8 @@ dumpstate.py
 postgre.log
 postgres.log
 pukelog.txt
-setup
 stateguts.txt
 traceback.log
-www.txt
 *.o
 __pycache__
 __pycache__/*
