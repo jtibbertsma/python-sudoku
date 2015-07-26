@@ -17,5 +17,5 @@ __pycache__/*
 build
 build/*
 *.sublime-workspace
-.state_guts.txt
+state_guts.txt
 fakedata.py
