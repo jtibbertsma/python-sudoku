@@ -13,7 +13,7 @@ def grids():
         yield gl[n]
 
 def main():
-    for solver in map(ProfileSolver, grids()):
+    for solver in map(FastSolver, grids()):
         solver.solve()
 
 if __name__ == '__main__':

@@ -65,14 +65,14 @@ class StartCreating(BasicSolver, Random):
             move = self.findnextmove()
             self.apply(move)
 
-#    def howmanymoves(self):
- #       """Calculate the number of cells to fill into the new terminal pattern.
-  #      This is set up to give 11 in the normal case of a sudoku grid with 9
+   # def howmanymoves(self):
+   #     """Calculate the number of cells to fill into the new terminal pattern.
+   #     This is set up to give 11 in the normal case of a sudoku grid with 9
    #     rows. However, 11 doesn't work well for other grid sizes.
-    #    """
-     #   size = self.state.size
-      #  square = size * size
-       # return square // 10 + 3
+   #     """
+   #     size = self.state.size
+   #     square = size * size
+   #     return square // 10 + 3
 
 class FinishCreating(BasicSolver, Elimination, Sledgehammer):
     """This solver is used to finish filling the grid which was started by

@@ -585,50 +585,59 @@ class HiddenQuads(HiddenSets):
             )
         return super().nextmove()
 
-class cache_for_sf(list):
-    """Private list subtype for SetFinder; implements clear so that it can be
-    used by the CachingAlgorithm protocol.
-    """
-    def __new__(cls, *args, **kwargs):
-        return [set() for n in range(27)]
-    def clear(self):
-        for s in self:
-            s.clear()
+# class cache_for_sf(list):
+#     """Private list subtype for SetFinder; implements clear so that it can be
+#     used by the CachingAlgorithm protocol.
+#     """
+#     def __new__(cls, *args, **kwargs):
+#         return [set() for n in range(27)]
+#     def clear(self):
+#         for s in self:
+#             s.clear()
 
-class SetFinder(CachingAlgorithm):
-    """Analyze each house looking for naked pairs, naked triples etc. Finding
-    a naked set also implies finding a hidden set. For example, if we find
-    a naked pair in a row with five unsolved cells, the three remaining cells
-    comprise a hidden triple.
+# class SetFinder(CachingAlgorithm):
+#     """Analyze each house looking for naked pairs, naked triples etc. Finding
+#     a naked set also implies finding a hidden set. For example, if we find
+#     a naked pair in a row with five unsolved cells, the three remaining cells
+#     comprise a hidden triple.
 
-    This algorithm assumes that any possible hidden or naked singles have been
-    found already.
-    """
-    def __init__(self, **kwargs):
-        self.sf_fin_houses = set()
-        self.sf_elim_keys = cache_for_sf()
-        super().__init__(**kwargs)
-        self.cache_list.append(self.sf_fin_houses)
-        self.cache_list.append(self.sf_elim_keys)
+#     This algorithm assumes that any possible hidden or naked singles have been
+#     found already.
+#     """
+#     def __init__(self, **kwargs):
+#         self.sf_fin_houses = set()
+#         self.sf_elim_keys = cache_for_sf()
+#         super().__init__(**kwargs)
+#         self.cache_list.append(self.sf_fin_houses)
+#         self.cache_list.append(self.sf_elim_keys)
 
-    def do_setfind(self):
-        """Do a search for sets up to whatever is in our MRO. So if only
-        NakedPairs are in the MRO, we only search for two item naked sets,
-        but if NakedQuads are in the MRO, search for naked pairs, naked triples,
-        and naked quads (Even if NakedPairs isn't explicitly in the MRO.)
-        """
-        # Get a list of houses containing unsolved keys
-        houses = [
-            {key for key in house if key not in self.state.solved_keys}
-                for house in self.state.houses
-        ]
-        for house, house_keys in enumerate(houses):
-            # check caches
-            if house in self.sf_fin_houses:
-                continue
-            if self.sf_elim_keys[house]:
-                house_keys -= self.sf_elim_keys[house]
+#     def do_setfind(self):
+#         """Do a search for sets up to whatever is in our MRO. So if only
+#         NakedPairs are in the MRO, we only search for two item naked sets,
+#         but if NakedQuads are in the MRO, search for naked pairs, naked triples,
+#         and naked quads (Even if NakedPairs isn't explicitly in the MRO.)
+#         """
+#         # Get a list of houses containing unsolved keys
+#         houses = [
+#             {key for key in house if key not in self.state.solved_keys}
+#                 for house in self.state.houses
+#         ]
+#         for house, house_keys in enumerate(houses):
+#             # check caches
+#             if house in self.sf_fin_houses:
+#                 continue
+#             if self.sf_elim_keys[house]:
+#                 house_keys -= self.sf_elim_keys[house]
 
+#             # bulk of algorithm is in C. this function returns a three tuple:
+#             # (naked keys, remaining keys, candidates). returns None if unsuccessful.
+#             k = self.state.analyze_set(house_keys, max(7, self.sf_limit))
+#             if not k:
+#                 continue
+#             naked, hidden, cands = k
+
+#             # calculate change dict
+#             change = {}
             
 
 class SimpleXWings(CachingAlgorithm):
