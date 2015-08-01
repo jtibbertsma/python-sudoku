@@ -196,7 +196,7 @@ data_CandidateSet___new__(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
             if (!PyErr_Occurred())
                 PyErr_Format(PyExc_TypeError,
                     "CandidateSet constructor expects "
-                    "positive ints < 9, not '%d'", bit);
+                    "non negative ints < 9, not '%d'", bit);
             return NULL;
         }
         SET_BIT(set,bit);
